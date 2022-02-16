@@ -53,26 +53,27 @@ export default function TextForm(props) {
       <div className="container my-3" style={{color: props.mode ==='light'? 'black': 'whitesmoke'}}>
        <form>
            <h3>{props.heading}</h3>
-        <div className="form-group">
+        <div className="form-group my-1">
          {/* <label for="myBox">{props.heading}</label> */}
          <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode ==='light'? 'whitesmoke': '#181a1c', color: props.mode ==='light'? 'black': 'whitesmoke'}} id="myBox" rows="8"></textarea>
         </div>
        </form>
-       <div className="button btn btn-primary mt-3" onClick={upperCase}>Uppercase</div>
-       <div className="button btn btn-primary mt-3 ms-3" onClick={lowerCase}>Lowercase</div>
-       <div className="button btn btn-primary mt-3 ms-3" onClick={textBold}>Bold</div>
-       <div className="button btn btn-primary mt-3 ms-3" onClick={textUnderline}>Underline</div>
-       <div className="button btn btn-primary mt-3 ms-3" onClick={removeExtraSpaces}>Remove Extra Spaces</div>
-       <div className="button btn btn-danger mt-3 ms-3" onClick={clearText}>Clear</div>
+       <button disabled={text.length===0} className="button btn btn-primary mx-1 my-1" onClick={upperCase}>Uppercase</button>
+       <button disabled={text.length===0} className="button btn btn-primary mx-1 my-1" onClick={lowerCase}>Lowercase</button>
+       <button disabled={text.length===0} className="button btn btn-primary mx-1 my-1" onClick={textBold}>Bold</button>
+       <button disabled={text.length===0} className="button btn btn-primary mx-1 my-1" onClick={textUnderline}>Underline</button>
+       <button disabled={text.length===0} className="button btn btn-primary mx-1 my-1" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+       <button disabled={text.length===0} className="button btn btn-danger mx-1 my-1" onClick={clearText}>Clear</button>
       </div>
 
       <div className="container my-3" style={{color: props.mode ==='light'? 'black': 'whitesmoke'}}>
           <h3>Your text Summary</h3>
-          <p>{text.split(" ").length} words and {text.length} characters</p>
-          <p> {0.0008 * text.split(" ").length} Minutes read</p>
+          <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+          <p> {0.0008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</p>
           <h3>Preview</h3>
-          <p>{text}</p>
+          <p>{text.length>0?text:"Nothing to preview!"}</p>
       </div>
       </>
   )
 }
+
